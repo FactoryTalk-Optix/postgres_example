@@ -1,0 +1,33 @@
+Name: Model
+Type: ModelCategoryFolder
+Children:
+- Name: postgres_query_create_table
+  Id: g=06b584609224c39c7424cfede7d05ab4
+  Type: BaseDataVariableType
+  DataType: String
+  Value: "CREATE TABLE MyTable (\n    id SERIAL PRIMARY KEY,\n    Variable1 INTEGER NOT NULL,\n    Variable2 VARCHAR(255) NOT NULL,\n    DateTimeUTC TIMESTAMP WITH TIME ZONE NOT NULL,\n    DateTimeNow TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()\n);"
+- Name: postgres_query_drop_table
+  Id: g=4ff8cf957f78c1d79bb5607f1b138169
+  Type: BaseDataVariableType
+  DataType: String
+  Value: "DROP TABLE IF EXISTS MyTable;"
+- Name: random_data_rows
+  Id: g=e825800934a170fa08e350f72cf49bda
+  Type: BaseDataVariableType
+  DataType: Int32
+  Value: 20
+- Name: postgres_query_insert
+  Id: g=cdda27dbce41ca1b864a0af5bdac7e65
+  Type: BaseDataVariableType
+  DataType: String
+  Value: "INSERT INTO MyTable (Variable1, Variable2, DateTimeUTC, DateTimeNow) VALUES (42,'test', '2023-04-28 11:08:19.369759', '2023-04-28 11:08:19.369759');"
+- Name: postgres_query_select
+  Id: g=fe3704afd5cc53814f29442295c31a66
+  Type: BaseDataVariableType
+  DataType: String
+  Value: "SELECT * FROM MyTable"
+- Name: postgres_query_truncate
+  Id: g=8de6d40ea9189d4bb376826f9932ab94
+  Type: BaseDataVariableType
+  DataType: String
+  Value: "Truncate MyTable"

@@ -1,0 +1,182 @@
+Name: DataStores
+Type: DataStoresCategoryFolder
+Children:
+- Name: PostgresConnector
+  Id: g=aae383b60ffec02def5b80b26edb957e
+  Type: NetLogic
+  Children:
+  - Name: Connection status
+    Id: g=4990e914a549e76963f41e8c002dc88b
+    Type: BaseDataVariableType
+    DataType: Boolean
+    Value: false
+  - Class: Method
+    Name: ConnectToPostgresDB
+  - Class: Method
+    Name: DisconnectFromPostgresDB
+  - Class: Method
+    Name: SelectQuery
+    Children:
+    - Name: ns=0;InputArguments
+      Type: BaseVariableType
+      DataType: Argument
+      ReferenceType: HasProperty
+      ValueRank: OneDimension
+      ArrayDimensions: [0]
+      Value: [{"TypeId":{"Id":296},"Body":{"Name":"query","DataType":{"Id":12},"ValueRank":-1,"ArrayDimensions":[],"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}},{"TypeId":{"Id":296},"Body":{"Name":"containerId","DataType":{"Id":17},"ValueRank":-1,"ArrayDimensions":[],"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}}]
+  - Name: Server IP
+    Id: g=05b6b589c7039e7f406a45693a75a85d
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "172.20.0.42"
+  - Name: Server port
+    Id: g=c9506a9fdb792556e610de81227e0aaa
+    Type: BaseDataVariableType
+    DataType: UInt16
+    Value: 5432
+  - Name: Database name
+    Id: g=f65cf4147d3b72351eca81eb780b08ba
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "epi"
+  - Name: Username
+    Id: g=4b17914e515a1c8be0f1398347251423
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "admin"
+  - Name: Password
+    Id: g=3b7c75f8ef60bb1e421fcad37c68b2cc
+    Type: BaseDataVariableType
+    DataType: Password
+    Value: "Password01"
+  - Name: SSH enabled
+    Id: g=0ae87318f8990dcd1fa96278f57b656a
+    Type: BaseDataVariableType
+    DataType: Boolean
+    Value: true
+    Children:
+    - Name: SSH hostname IP
+      Id: g=323c002c1ba5ac69ecf9ebc4b0252c10
+      Type: BaseDataVariableType
+      DataType: String
+      Value: "192.168.56.101"
+    - Name: SSH username
+      Id: g=9478bdebb565fa2c1564a44486033cc7
+      Type: BaseDataVariableType
+      DataType: String
+      Value: "user0"
+    - Name: SSH password
+      Id: g=d81b3374fe8b8ed1324fd01c4514ba8c
+      Type: BaseDataVariableType
+      DataType: Password
+      Value: "Password01"
+    - Name: SSH port
+      Id: g=488d4718611055b6338d420686e299a3
+      Type: BaseDataVariableType
+      DataType: UInt16
+      Value: 2222
+    - Name: SSH connection status
+      Id: g=9bcfcdbd12e4f9e6b5cecd3dac5ffbd1
+      Type: BaseDataVariableType
+      DataType: Boolean
+      Value: false
+  - Class: Method
+    Name: Query
+    Children:
+    - Name: ns=0;InputArguments
+      Type: BaseVariableType
+      DataType: Argument
+      ReferenceType: HasProperty
+      ValueRank: OneDimension
+      ArrayDimensions: [0]
+      Value: [{"TypeId":{"Id":296},"Body":{"Name":"query","DataType":{"Id":12},"ValueRank":-1,"ArrayDimensions":[],"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}}]
+  - Class: Method
+    Name: InsertRandomData
+    Children:
+    - Name: ns=0;InputArguments
+      Type: BaseVariableType
+      DataType: Argument
+      ReferenceType: HasProperty
+      ValueRank: OneDimension
+      ArrayDimensions: [0]
+      Value: [{"TypeId":{"Id":296},"Body":{"Name":"rows","DataType":{"Id":6},"ValueRank":-1,"ArrayDimensions":[],"Description":{"NamespaceIndex":-1,"LocaleId":"","Text":""}}}]
+  - Name: Queries feedback
+    Id: g=16f4cf6a1e40fe4d6f9846eca455b811
+    Type: BaseDataVariableType
+    DataType: String
+    Value: ""
+- Name: SupportEmbeddedDB
+  Id: g=158d3fbc6cdc1b162325891a71baf306
+  Type: SQLiteStore
+  Children:
+  - Name: Tables
+    Type: BaseObjectType
+  - Class: Reference
+    Target: ns=23;i=30
+    Direction: Forward
+  - Class: Reference
+    Target: ns=23;i=33
+    Direction: Forward
+  - Name: MaxColumnNameLength
+    Type: BaseDataVariableType
+    DataType: UInt32
+    AccessLevel: Read
+    Value: 0
+  - Name: MaxColumnCount
+    Type: BaseDataVariableType
+    DataType: UInt32
+    AccessLevel: Read
+    Value: 0
+  - Name: DataTypeCompatibilityMap
+    Type: BaseDataVariableType
+    DataType: NodeId
+    AccessLevel: Read
+    ValueRank: OneOrMoreDimensions
+    ArrayDimensions: [0,0]
+    Value: {"Type":17,"Dimensions":[0,0],"Body":[]}
+  - Name: Status
+    Type: PropertyType
+    DataType: StoreStatus
+    AccessLevel: Read
+    Value: 2
+  - Class: Reference
+    Target: ns=21;i=22
+    Direction: Forward
+  - Class: Reference
+    Target: ns=21;i=6
+    Direction: Forward
+  - Class: Reference
+    Target: ns=21;i=8
+    Direction: Forward
+  - Class: Reference
+    Target: ns=21;i=25
+    Direction: Forward
+  - Class: Reference
+    Target: ns=21;i=38
+    Direction: Forward
+  - Class: Reference
+    Target: ns=21;i=41
+    Direction: Forward
+  - Class: Reference
+    Target: ns=21;i=44
+    Direction: Forward
+  - Class: Reference
+    Target: ns=21;i=53
+    Direction: Forward
+  - Class: Reference
+    Target: ns=21;i=55
+    Direction: Forward
+  - Class: Reference
+    Target: ns=21;i=57
+    Direction: Forward
+  - Class: Reference
+    Target: ns=21;i=59
+    Direction: Forward
+  - Name: InMemory
+    Type: BaseDataVariableType
+    DataType: Boolean
+    Value: true
+  - Name: Filename
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "SupportEmbeddedDB"
