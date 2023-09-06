@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrap Table Example</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.21.4/bootstrap-table.min.css'>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Bootstrap Table Example</h1>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <input type="text" id="searchBox" class="form-control" placeholder="Search...">
+        <br>
+      </div>
+    </div>
+    <table id="tableData" class="table table-striped table-bordered" data-show-header="true" data-pagination="true" data-id-field="name">
+      <thead>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div id="paginationControls"></div>
+  </div>
+
+  <!-- Include jQuery and Bootstrap JS -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.21.4/bootstrap-table.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      // Sample JSON data
+      var jsonData = $jsonPlaceholder;
+
+      // Function to populate the table with JSON data
+      function populateTable(data) {
+
+        var tableHead = $('#tableData thead');
+        tableHead.empty();
+        
+        var headerRow = $('<tr>');
+        Object.keys(data[0]).forEach(function (key) {
+          $('<th>').text(key)
+                    .data('data-field', key)
+                    .data('sortable', true)
+                    .appendTo(headerRow);
+        });
+        tableHead.append(headerRow);
+
+        var tableBody = $('#tableData tbody');
+        tableBody.empty();
+        $.each(data, function (index, value) {
+          var row = $('<tr>');
+          $.each(value, function (key, value) {
+            $('<td>').text(value).appendTo(row);
+          });
+          tableBody.append(row);
+        });
+      }
+
+      // Populate the table with sample JSON data
+      populateTable(jsonData);
+
+      // Search functionality
+      $('#searchBox').on('input', function () {
+        var searchText = $(this).val().toLowerCase();
+        var filteredData = jsonData.filter(function (item) {
+          return JSON.stringify(item).toLowerCase().indexOf(searchText) !== -1;
+        });
+        populateTable(filteredData);
+      });
+
+      // Sort functionality
+      $('#tableData th').click(function () {
+        var fieldName = $(this).data('field');
+        var sortOrder = $(this).hasClass('asc') ? -1 : 1;
+        $(this).closest('tr').find('th').removeClass('asc desc');
+        if (sortOrder === 1) {
+          $(this).addClass('asc');
+        } else {
+          $(this).addClass('desc');
+        }
+        var sortedData = jsonData.sort(function (a, b) {
+          if (a[fieldName] < b[fieldName]) {
+            return -1 * sortOrder;
+          } else if (a[fieldName] > b[fieldName]) {
+            return 1 * sortOrder;
+          } else {
+            return 0;
+          }
+        });
+        populateTable(sortedData);
+      });
+      $('#tableData').bootstrapTable();
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+version: '3'
+services:
+  my-grafana:
+    image: grafana/grafana:latest
+    container_name: my-grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - mynetwork
+
+  my-pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: my-pgadmin
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: Password01
+    networks:
+      - mynetwork
+    depends_on:
+      - my-ssh
+
+  my-postgres:
+    image: postgres:latest
+    container_name: my-postgres
+    restart: always
+    ports:
+      - "8081:5432"
+      - "2220:22"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Password01
+      POSTGRES_DB: epi
+    networks:
+      - mynetwork
+    depends_on:
+      - my-ssh
+
+  my-sql:
+    image: mysql:latest
+    container_name: my-sql
+    restart: always
+    ports:
+      - "8083:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Password01
+    networks:
+      - mynetwork
+
+  my-workbench:
+    image: linuxserver/mysql-workbench:latest
+    container_name:  my-workbench
+    restart: always
+    ports:
+      - "8084:3306"
+      - "8085:3000"
+    depends_on:
+      - my-sql
+    environment:
+      MYSQL_HOST: my-sql
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWOTD: Password01
+    networks:
+      - mynetwork
+
+  my-ssh:
+    image: docker.io/linuxserver/openssh-server:latest
+    container_name: my-ssh
+    restart: always
+    ports:
+      - "2222:2222"
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: 'Europe/Berlin'
+      PASSWORD_ACCESS: 'true'
+      ROOT_PASSWORD: Password01
+      PUBKEY_AUTHENTICATION: no
+      USER_NAME: user0
+      USER_PASSWORD: Password01 
+      SSH_USERS: user1:Password01
+      ALLOWED_HOSTS: my-pgadmin, my-postgres
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+
